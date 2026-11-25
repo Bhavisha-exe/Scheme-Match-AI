@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SchemeMatch AI | Government Scheme Finder</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+:root{--navy:#142b49;--blue:#245bdb;--bg:#f5f7fb;--muted:#68778c;--green:#16865b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:'DM Sans',sans-serif;color:#1b2b42}
+header{background:#fff;border-bottom:1px solid #e8edf4;padding:17px 7%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
+.logo{font-weight:800;font-size:21px;color:var(--navy)}.logo span{color:var(--blue)}
+nav a{margin-left:25px;text-decoration:none;color:#526176;font-size:13px;font-weight:600}
+.hero{background:linear-gradient(115deg,#102846,#1c4c83);color:white;padding:65px 8% 75px}
+.hero small{color:#a9c9ff;font-weight:700;letter-spacing:2px}
+.hero h1{font:700 clamp(34px,5vw,55px) 'Playfair Display',serif;max-width:720px;line-height:1.12;margin:17px 0}
+.hero p{color:#d4e0f0;max-width:620px;line-height:1.8;font-size:15px}
+.pill{display:inline-block;background:#ffffff1c;border:1px solid #ffffff40;border-radius:30px;padding:8px 14px;font-size:12px;margin-top:13px}
+main{max-width:1100px;margin:-28px auto 60px;padding:0 20px}
+.panel{background:#fff;border-radius:18px;padding:30px;box-shadow:0 12px 40px #19375b12;margin-bottom:24px}
+.section-title{font-size:21px;font-weight:800;color:var(--navy);margin:0 0 7px}
+.sub{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 25px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.field label{display:block;font-size:12px;font-weight:700;color:#43546a;margin-bottom:8px}
+input,select{width:100%;padding:13px 12px;border:1px solid #dce3ed;border-radius:9px;background:#fff;color:#25364c;font:14px 'DM Sans';outline:none}
+input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #245bdb15}
+button{border:0;border-radius:9px;padding:14px 22px;font:700 14px 'DM Sans';cursor:pointer}
+.primary{background:var(--blue);color:#fff}.primary:hover{background:#1748bd}
+.actions{display:flex;gap:12px;margin-top:25px;flex-wrap:wrap}
+.secondary{background:#edf2fa;color:#304b6d}
+.results-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.count{background:#e9f2ff;color:#245bdb;padding:8px 12px;border-radius:30px;font-size:12px;font-weight:700}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:17px;margin-top:20px}
+.scheme{border:1px solid #e5eaf1;border-radius:14px;padding:21px;background:#fff}
+.scheme h3{color:var(--navy);margin:12px 0 7px;font-size:18px}
+.scheme p{color:var(--muted);font-size:13px;line-height:1.6}
+.tag{font-size:11px;font-weight:700;background:#edf3ff;color:#245bdb;padding:6px 9px;border-radius:20px;display:inline-block}
+.score{font-size:12px;color:var(--green);font-weight:700}
+.details{margin-top:16px;padding-top:15px;border-top:1px solid #edf0f4}
+.details summary{font-size:13px;color:var(--blue);font-weight:700;cursor:pointer}
+.details p{margin:10px 0 5px}
+.status{font-size:11px;font-weight:700;padding:4px 7px;border-radius:5px;margin-right:5px}
+.pass{background:#e5f6ed;color:#147b50}.fail{background:#ffeded;color:#bd4545}.unknown{background:#fff4dc;color:#936719}
+ul{padding-left:19px;color:#53647a;font-size:12px;line-height:1.8}
+.empty{text-align:center;padding:35px;color:#75849a;font-size:14px}
+.notice{font-size:12px;color:#7a6840;background:#fff8e8;border:1px solid #f3e5bd;padding:13px 15px;border-radius:9px;line-height:1.6;margin-top:20px}
+footer{text-align:center;padding:25px;color:#8491a2;font-size:12px}
+@media(max-width:700px){header{padding:15px 5%}nav{display:none}.hero{padding:48px 7% 65px}.grid,.cards{grid-template-columns:1fr}.panel{padding:21px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Scheme<span>Match</span> AI</div>
+  <nav><a href="#home">Home</a><a href="#profile">Find Schemes</a><a href="#about">About</a></nav>
+</header>
+
+<section class="hero" id="home">
+  <small>AI-POWERED GOVERNMENT SCHEME DISCOVERY</small>
+  <h1>Find the support<br>you may be eligible for.</h1>
+  <p>Discover government schemes based on your profile. Understand eligibility conditions, explore benefits and find the next steps — all in one place.</p>
+  <span class="pill">✦ Explainable eligibility matching</span>
+</section>
+
+<main>
+<section class="panel" id="profile">
+  <h2 class="section-title">Tell us about yourself</h2>
+  <p class="sub">Enter your details to discover schemes that may match your circumstances.</p>
+  <form id="profileForm">
+    <div class="grid">
+      <div class="field"><label>Age</label><input id="age" type="number" min="1" max="120" placeholder="e.g. 22" required></div>
+      <div class="field"><label>Annual family income (₹)</label><input id="income" type="number" min="0" placeholder="e.g. 250000" required></div>
+      <div class="field"><label>Occupation</label>
+        <select id="occupation" required>
+          <option value="">Select occupation</option><option>Student</option><option>Farmer</option><option>Self-employed</option><option>Business owner</option><option>Salaried</option><option>Unemployed</option><option>Other</option>
+        </select>
+      </div>
+      <div class="field"><label>State / Union Territory</label>
+        <select id="state" required>
+          <option value="">Select state</option>
+          <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option><option>Bihar</option><option>Chhattisgarh</option><option>Goa</option><option>Gujarat</option><option>Haryana</option><option>Himachal Pradesh</option><option>Jharkhand</option><option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option><option>Maharashtra</option><option>Manipur</option><option>Meghalaya</option><option>Mizoram</option><option>Nagaland</option><option>Odisha</option><option>Punjab</option><option>Rajasthan</option><option>Sikkim</option><option>Tamil Nadu</option><option>Telangana</option><option>Tripura</option><option>Uttar Pradesh</option><option>Uttarakhand</option><option>West Bengal</option><option>Delhi</option><option>Other</option>
+        </select>
+      </div>
+      <div class="field"><label>Social category</label>
+        <select id="category"><option value="">Prefer not to say</option><option>General</option><option>OBC</option><option>SC</option><option>ST</option><option>EWS</option></select>
+      </div>
+      <div class="field"><label>Gender</label>
+        <select id="gender"><option value="">Prefer not to say</option><option>Female</option><option>Male</option><option>Other</option></select>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="primary" type="submit">Find Matching Schemes →</button>
+      <button class="secondary" type="reset" id="resetBtn">Clear Form</button>
+    </div>
+  </form>
+</section>
+
+<section class="panel" id="results">
+  <div class="results-head">
+    <div><h2 class="section-title">Your Scheme Recommendations</h2><p class="sub" style="margin:5px 0 0">Your matching results will appear here.</p></div>
+    <span class="count" id="resultCount">0 schemes found</span>
+  </div>
+  <div id="cards" class="cards"><div class="empty">Complete your profile and click “Find Matching Schemes” to get started.</div></div>
+  <div class="notice">Important: This is an academic demonstration using sample scheme records and simplified illustrative rules. It is not an official eligibility assessment. Scheme rules may change. Always verify current eligibility, documents and application details on the relevant government portal.</div>
+</section>
+
+<section class="panel" id="about">
+  <h2 class="section-title">How SchemeMatch AI works</h2>
+  <p class="sub">A transparent recommendation workflow designed to simplify scheme discovery.</p>
+  <div class="grid">
+    <div><span class="tag">01 · PROFILE INPUT</span><p>Users enter relevant personal and socioeconomic details.</p></div>
+    <div><span class="tag">02 · SCHEME MATCHING</span><p>The system compares profile information with stored scheme conditions.</p></div>
+    <div><span class="tag">03 · EXPLANATION</span><p>Results show matched, unmet and unknown conditions to make recommendations understandable.</p></div>
+  </div>
+</section>
+</main>
+<footer>SchemeMatch AI · Academic Project Prototype · Government scheme discovery made simpler</footer>
+
+<script>
+const schemes = [
+ {
+  name:"PM-KISAN Samman Nidhi",
+  category:"Agriculture",
+  description:"Income support scheme for eligible farmer families.",
+  benefit:"Financial assistance of ₹6,000 per year, subject to current scheme rules.",
+  docs:["Aadhaar","Land ownership / land records","Bank account details"],
+  link:"https://pmkisan.gov.in/",
+  rules:[
+   {label:"Applicant is a farmer",test:p=>p.occupation==="Farmer"},
+   {label:"Landholding and farmer-family conditions",test:p=>null},
+   {label:"Exclusion categories and other scheme conditions",test:p=>null}
+  ]
+ },
+ {
+  name:"National Scholarship Portal",
+  category:"Education",
+  description:"A platform through which students can discover and apply for eligible central and other scholarships.",
+  benefit:"Scholarship amount and eligibility depend on the specific scholarship.",
+  docs:["Student ID / admission details","Income certificate, if required","Category certificate, if applicable","Bank details"],
+  link:"https://scholarships.gov.in/",
+  rules:[
+   {label:"Applicant is a student",test:p=>p.occupation==="Student"},
+   {label:"Course and institution requirements",test:p=>null},
+   {label:"Income and scholarship-specific conditions",test:p=>null}
+  ]
+ },
+ {
+  name:"Ayushman Bharat PM-JAY",
+  category:"Healthcare",
+  description:"Government health assurance programme for eligible beneficiary families.",
+  benefit:"Health cover up to ₹5 lakh per eligible family per year for specified hospitalisation.",
+  docs:["Beneficiary identification","Aadhaar or other accepted identity proof","Documents requested during verification"],
+  link:"https://pmjay.gov.in/",
+  rules:[
+   {label:"Household is included in the applicable beneficiary database",test:p=>null},
+   {label:"Identity and beneficiary verification",test:p=>null}
+  ]
+ },
+ {
+  name:"PM Awas Yojana – Gramin",
+  category:"Housing",
+  description:"Rural housing assistance for eligible households meeting programme criteria.",
+  benefit:"Housing assistance as per applicable rural scheme norms and location.",
+  docs:["Identity proof","Household details","Land / housing-related records","Other documents required by local authorities"],
+  link:"https://pmayg.nic.in/",
+  rules:[
+   {label:"Applicant belongs to an eligible rural household",test:p=>null},
+   {label:"Household meets housing deprivation and exclusion criteria",test:p=>null},
+   {label:"Local verification and selection requirements",test:p=>null}
+  ]
+ },
+ {
+  name:"Stand-Up India",
+  category:"Entrepreneurship",
+  description:"Facilitates bank loans for eligible SC/ST and women entrepreneurs for greenfield enterprises.",
+  benefit:"Composite bank loans generally from ₹10 lakh to ₹1 crore, subject to scheme and lender conditions.",
+  docs:["Identity and address proof","Business project report","Caste certificate, if applicable","Bank-required documents"],
+  link:"https://www.standupmitra.in/",
+  rules:[
+   {label:"Applicant is a woman or SC/ST entrepreneur",test:p=>p.gender==="Female"||p.category==="SC"||p.category==="ST"},
+   {label:"Proposed enterprise meets greenfield conditions",test:p=>null},
+   {label:"Bank and repayment assessment",test:p=>null}
+  ]
+ }
+];
+
+function evaluate(rule,profile){
+ const result=rule.test(profile);
+ if(result===true)return "pass";
+ if(result===false)return "fail";
+ return "unknown";
+}
+
+function recommend(profile){
+ return schemes.map(s=>{
+   const checks=s.rules.map(r=>({label:r.label,status:evaluate(r,profile)}));
+   const matched=checks.filter(c=>c.status==="pass").length;
+   const unmet=checks.filter(c=>c.status==="fail").length;
+   const unknown=checks.filter(c=>c.status==="unknown").length;
+   return {...s,checks,matched,unmet,unknown,score:Math.round((matched/Math.max(checks.length,1))*100)};
+ }).sort((a,b)=>b.score-a.score);
+}
+
+document.getElementById("profileForm").addEventListener("submit",function(e){
+ e.preventDefault();
+ const profile={
+  age:Number(document.getElementById("age").value),
+  income:Number(document.getElementById("income").value),
+  occupation:document.getElementById("occupation").value,
+  state:document.getElementById("state").value,
+  category:document.getElementById("category").value,
+  gender:document.getElementById("gender").value
+ };
+ const results=recommend(profile);
+ const container=document.getElementById("cards");
+ document.getElementById("resultCount").textContent=results.length+" schemes analysed";
+ container.innerHTML=results.map(s=>`
+  <article class="scheme">
+   <span class="tag">${s.category}</span>
+   <h3>${s.name}</h3>
+   <p>${s.description}</p>
+   <div class="score">${s.matched} matched · ${s.unmet} unmet · ${s.unknown} need verification</div>
+   <div class="details">
+    <p><b>Potential benefit</b><br>${s.benefit}</p>
+    <details>
+     <summary>View eligibility explanation</summary>
+     <ul>${s.checks.map(c=>`<li><span class="status ${c.status}">${c.status.toUpperCase()}</span>${c.label}</li>`).join("")}</ul>
+     <p><b>Documents to check</b></p>
+     <ul>${s.docs.map(d=>`<li>${d}</li>`).join("")}</ul>
+    </details>
+    <p style="margin-top:15px"><a href="${s.link}" target="_blank" rel="noopener" style="color:#245bdb;font-size:13px;font-weight:700">Visit scheme portal ↗</a></p>
+   </div>
+  </article>
+ `).join("");
+ document.getElementById("results").scrollIntoView({behavior:"smooth"});
+});
+
+document.getElementById("resetBtn").addEventListener("click",()=>{
+ document.getElementById("cards").innerHTML='<div class="empty">Complete your profile and click “Find Matching Schemes” to get started.</div>';
+ document.getElementById("resultCount").textContent="0 schemes found";
+});
+</script>
+</body>
+</html>
