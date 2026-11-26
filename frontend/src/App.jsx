@@ -39,6 +39,9 @@ function App() {
   const [age, setAge] = useState("");
   const [state, setState] = useState("");
   const [income, setIncome] = useState("");
+  const [occupation, setOccupation] = useState("");
+  const [gender, setGender] = useState("");
+  const [applicantCategory, setApplicantCategory] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const filteredSchemes = schemes.filter((scheme) => {
@@ -52,10 +55,41 @@ function App() {
     return matchesSearch && matchesCategory;
   });
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+
+    try {
+      const response = await fetch(
+        "https://schemematch-backend.onrender.com/recommend",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            age: Number(age),
+            income: Number(income),
+            occupation,
+            state,
+            category: applicantCategory,
+            gender,
+          }),
+        }
+     );
+
+     if (!response.ok) {
+       throw new Error("Failed to fetch recommendations");
+     }
+
+    const data = await response.json();
+
+    console.log("Backend recommendations:", data);
     setSubmitted(true);
+  } catch (error) {
+    console.error("Backend error:", error);
+    alert("Unable to connect to the backend. Please try again.");
   }
+}
 
   return (
     <div className="app">
@@ -322,23 +356,68 @@ function App() {
 
               <label>
                 Annual family income
-                <select
+                <input
+                  type="number"
+                  min="0"
+                  placeholder="Enter annual family income in ₹"
                   value={income}
                   onChange={(event) => {
                     setIncome(event.target.value);
                     setSubmitted(false);
                   }}
                   required
+                />
+              </label>
+              <label>
+                Occupation
+               <select
+                  value={occupation}
+                  onChange={(event) => {
+                    setOccupation(event.target.value);
+                    setSubmitted(false);
+                }}
+                required
+              >
+                <option value="">Select occupation</option>
+                <option value="student">Student</option>
+                <option value="farmer">Farmer</option>
+                <option value="employed">Employed</option>
+                <option value="self-employed">Self-employed</option>
+                <option value="unemployed">Unemployed</option>
+               </select>
+              </label>
+              <label>
+                Scheme Category
+                <select
+                  value={applicantCategory}
+                  onChange={(event) => {
+                    setApplicantCategory(event.target.value);
+                    setSubmitted(false);
+                  }}
+                  required 
                 >
-                  <option value="">Select income range</option>
-                  <option>Below ₹1 lakh</option>
-                  <option>₹1 lakh – ₹2.5 lakh</option>
-                  <option>₹2.5 lakh – ₹5 lakh</option>
-                  <option>₹5 lakh – ₹8 lakh</option>
-                  <option>Above ₹8 lakh</option>
+                  <option value="">Select category</option>
+                  <option value="education">Education</option>
+                  <option value="agriculture">Agriculture</option>
+                  <option value="housing">Housing</option>
                 </select>
               </label>
-
+              <label>
+                Gender
+                <select
+                  value={gender}
+                  onChange={(event) => {
+                    setGender(event.target.value);
+                    setSubmitted(false);
+                  }}
+                  required
+                >
+                  <option value="">Select gender</option>
+                  <option value="female">Female</option>
+                  <option value="male">Male</option>
+                  <option value="other">Other</option>
+                </select>
+              </label>
               <button type="submit">
                 Continue to discover schemes <span>→</span>
               </button>
