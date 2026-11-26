@@ -1,11 +1,13 @@
-
 import os
-
 from fastapi import FastAPI
+from google import genai
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sqlalchemy import create_engine, Column, Integer, String, Float
 from sqlalchemy.orm import declarative_base, sessionmaker
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+client = genai.Client(api_key=GEMINI_API_KEY)
 
 app = FastAPI(
     title="SchemeMatch API",
@@ -168,3 +170,30 @@ def recommend(profile: UserProfile):
 
     finally:
         db.close()
+
+@app.post("/explain")
+def explain(profile: UserProfile):
+    prompt = f"""
+    You are SchemeMatch, a government scheme assistant.
+
+    Explain these user details in simple language:
+    Age: {profile.age}
+    Income: ₹{profile.income}
+    Occupation: {profile.occupation}
+    State: {profile.state}
+    Category: {profile.category}
+    Gender: {profile.gender}
+
+    Explain that eligibility must be verified using official government
+    sources. Do not invent scheme benefits or eligibility rules.
+    """
+
+    try:
+        response = client.models.generate_content(
+            model="gemini-3.8-flash",
+            contents=prompt
+        )
+        return {"explanation": response.text}
+
+    except Exception as e:
+        return {"error": "AI explanation unavailable"}
