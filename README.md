@@ -2,56 +2,89 @@
 # SchemeMatch – AI-Based Government Scheme Eligibility & Recommendation Engine
 
 ## About the Project
-SchemeMatch is a project designed to help citizens discover government schemes that may match their personal and financial profiles.
+SchemeMatch helps citizens discover government schemes that may match their personal and financial profiles.
 
-It aims to simplify scheme discovery by showing eligibility conditions, possible benefits, required documents, and official application links.
+The system uses profile-based eligibility matching, database retrieval and AI-generated explanations to simplify scheme discovery.
 
 ## Project Objectives
-- Help citizens discover relevant government schemes.
-- Check eligibility based on user profile information.
-- Explain matched and unmet eligibility conditions.
-- Display scheme benefits and required documents.
-- Provide official application links.
+- Discover relevant government schemes.
+- Match schemes against user profile information.
+- Display matched and unmet conditions.
+- Retrieve relevant scheme information from PostgreSQL.
+- Generate simple AI-based explanations.
+- Encourage verification through official government sources.
 
 ## How It Works
 1. User enters personal profile details.
-2. The system retrieves relevant government schemes.
-3. Eligibility conditions are checked against the profile.
-4. The system presents matching schemes and eligibility explanations.
-5. Users can review benefits, documents, and official links.
+2. The backend retrieves scheme records from PostgreSQL.
+3. A rule-based engine checks occupation and income conditions.
+4. The retrieval component ranks relevant schemes.
+5. Gemini generates explanations using retrieved scheme information.
+6. Results are displayed through the frontend.
 
 ## Technology Stack
 
-### Proposed Technologies
-- Frontend: React
+- Frontend: HTML, CSS, JavaScript
 - Backend: Python, FastAPI
-- AI/NLP: Large Language Models (LLM)
-- Retrieval: RAG
-- Vector Database: FAISS / ChromaDB
+- AI Model: Google Gemini API
+- Retrieval: Database-backed Retrieval-Augmented Generation (RAG)
 - Database: PostgreSQL
+- Deployment: GitHub Pages and Render
 - Version Control: Git and GitHub
 
-## Current Prototype
-The current prototype is a browser-based HTML, CSS, and JavaScript application.
+## Backend Features
 
-It demonstrates sample government schemes and basic rule-based eligibility matching. The scheme data and rules are illustrative and should be verified using official government sources.
+- FastAPI REST API.
+- PostgreSQL database integration.
+- Scheme retrieval endpoint: `/schemes`
+- Eligibility recommendation endpoint: `/recommend`
+- AI explanation endpoint: `/explain`
+- Occupation-based and income-based rule matching.
+- Database-backed scheme ranking and retrieval.
+- Gemini-powered explanations using retrieved scheme context.
+- CORS configuration for frontend integration.
 
-The proposed FastAPI backend, LLM, RAG pipeline, and vector database are future development work and are not yet implemented.
+## Current Database
 
-## Sample Schemes
-- PM-KISAN
+The prototype currently contains three illustrative scheme records:
+
+- PM-KISAN Samman Nidhi
 - National Scholarship Portal
 - Ayushman Bharat PM-JAY
-- PM Awas Yojana Gramin
-- Stand-Up India
+
+## API Endpoints
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/` | Backend health check |
+| GET | `/schemes` | Retrieve all schemes |
+| POST | `/recommend` | Generate scheme recommendations |
+| POST | `/explain` | Generate AI explanations using retrieved data |
+
+## Deployment
+
+- Frontend: https://bhavisha-exe.github.io/Scheme-Match-AI/
+- Backend: https://schemematch-backend.onrender.com
+- API Documentation: https://schemematch-backend.onrender.com/docs
 
 ## Team Contributions
+
 - Bhavisha: Scheme data and knowledge base.
-- Khushi: Backend and AI, FastAPI endpoints, retrieval, vector database, and explanation checks.
-- Shanvi: React frontend and integration.
+- Khushi: Backend development, FastAPI APIs, PostgreSQL integration, database retrieval, RAG implementation and Gemini integration.
+- Shanvi: Frontend development and backend integration.
+
+## Limitations
+
+- Current scheme records and eligibility rules are illustrative.
+- Retrieval uses PostgreSQL records and relevance scoring, not vector embeddings or FAISS/ChromaDB.
+- Gemini explanations depend on API availability and quota limits.
+- The current prototype checks only occupation and income conditions.
+- Official eligibility, benefits and documents require independent verification.
 
 ## Disclaimer
-SchemeMatch is an academic project prototype. It is not an official government eligibility checker. Always verify eligibility and application details through the relevant official government portals.
+
+SchemeMatch is an academic project prototype and is not an official government eligibility checker. Its recommendations do not guarantee eligibility or approval. Always verify scheme information through official government portals.
 
 ## Project Status
-Prototype development in progress.
+
+Working prototype with deployed frontend, FastAPI backend, PostgreSQL integration, rule-based eligibility matching and database-backed RAG retrieval.
