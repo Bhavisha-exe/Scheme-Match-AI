@@ -198,8 +198,8 @@ def explain(profile: UserProfile):
         )
         return {"explanation": response.text}
 
-    except Exception as e:
-    return {
-        "error": "AI explanation unavailable",
-        "details": str(e)
-    }
+        except Exception as e:
+        return {
+            "error": "AI explanation unavailable",
+            "details": str(e)
+        }
