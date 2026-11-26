@@ -196,16 +196,20 @@ def explain(profile: UserProfile):
     sources. Do not invent scheme benefits or eligibility rules.
     """
 
-    try:
-        response = client.models.generate_content(
-            model="gemini-3.8-flash",
-            contents=prompt
-        )
+    for attempt in range(3):
+        try:
+            response = client.models.generate_content(
+                model="gemini-3.8-flash",
+                contents=prompt
+            )
+            return {"explanation": response.text}
 
-        return {"explanation": response.text}
+        except Exception as e:
+            if attempt == 2:
+                return {
+                    "explanation": "AI explanation is temporarily unavailable. Please try again later.",
+                    "error": str(e)
+                }
 
-    except Exception as e:
-        return {
-            "explanation": "AI explanation is temporarily unavailable. Please check official government scheme sources to verify eligibility.",
-            "error": str(e)
-        }
+            import time
+            time.sleep(2)
