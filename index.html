@@ -202,38 +202,118 @@ function recommend(profile){
  }).sort((a,b)=>b.score-a.score);
 }
 
-document.getElementById("profileForm").addEventListener("submit",function(e){
- e.preventDefault();
- const profile={
-  age:Number(document.getElementById("age").value),
-  income:Number(document.getElementById("income").value),
-  occupation:document.getElementById("occupation").value,
-  state:document.getElementById("state").value,
-  category:document.getElementById("category").value,
-  gender:document.getElementById("gender").value
- };
- const results=recommend(profile);
- const container=document.getElementById("cards");
- document.getElementById("resultCount").textContent=results.length+" schemes analysed";
- container.innerHTML=results.map(s=>`
-  <article class="scheme">
-   <span class="tag">${s.category}</span>
-   <h3>${s.name}</h3>
-   <p>${s.description}</p>
-   <div class="score">${s.matched} matched · ${s.unmet} unmet · ${s.unknown} need verification</div>
-   <div class="details">
-    <p><b>Potential benefit</b><br>${s.benefit}</p>
-    <details>
-     <summary>View eligibility explanation</summary>
-     <ul>${s.checks.map(c=>`<li><span class="status ${c.status}">${c.status.toUpperCase()}</span>${c.label}</li>`).join("")}</ul>
-     <p><b>Documents to check</b></p>
-     <ul>${s.docs.map(d=>`<li>${d}</li>`).join("")}</ul>
-    </details>
-    <p style="margin-top:15px"><a href="${s.link}" target="_blank" rel="noopener" style="color:#245bdb;font-size:13px;font-weight:700">Visit scheme portal ↗</a></p>
-   </div>
-  </article>
- `).join("");
- document.getElementById("results").scrollIntoView({behavior:"smooth"});
+document.getElementById("profileForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const profile = {
+    age: Number(document.getElementById("age").value),
+    income: Number(document.getElementById("income").value),
+    occupation: document.getElementById("occupation").value,
+    state: document.getElementById("state").value,
+    category: document.getElementById("category").value,
+    gender: document.getElementById("gender").value
+  };
+
+  const container = document.getElementById("cards");
+  const count = document.getElementById("resultCount");
+
+  container.innerHTML = '<div class="empty">Connecting to SchemeMatch backend...</div>';
+
+  try {
+    const response = await fetch("https://schemematch-backend.onrender.com/recommend", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(profile)
+    });
+
+    if (!response.ok) {
+      throw new Error("Backend returned an error: " + response.status);
+    }
+
+    const data = await response.json();
+    const results = data.recommendations || [];
+
+    count.textContent = results.length + " schemes analysed";
+
+    if (results.length === 0) {
+      container.innerHTML = '<div class="empty">No recommendations returned. Please try again.</div>';
+      return;
+    }
+
+    container.innerHTML = results.map(item => {
+      const name = typeof item.scheme === "string"
+        ? item.scheme
+        : (item.scheme?.name || item.name || "Government Scheme");
+
+      const extra = schemes.find(s => s.name.toLowerCase() === name.toLowerCase());
+
+      const matched = item.matched_conditions || [];
+      const unmet = item.unmet_conditions || [];
+      const eligible = item.eligible;
+
+      const statusText = item.status || (eligible ? "Eligible (demo)" : "Needs verification");
+
+      return `
+        <article class="scheme">
+          <span class="tag">${extra?.category || "Government Scheme"}</span>
+          <h3>${name}</h3>
+          <p>${extra?.description || "Recommendation returned by the SchemeMatch backend."}</p>
+
+          <div class="score">
+            ${matched.length} matched · ${unmet.length} unmet
+          </div>
+
+          <div class="details">
+            <p><b>Backend status:</b> ${statusText}</p>
+            <p><b>Potential benefit</b><br>
+              ${item.benefit || extra?.benefit || "Please check the official scheme portal."}
+            </p>
+
+            <details>
+              <summary>View eligibility explanation</summary>
+
+              <p><b>Matched conditions</b></p>
+              <ul>
+                ${matched.length
+                  ? matched.map(c => `<li><span class="status pass">MATCHED</span>${c}</li>`).join("")
+                  : "<li>No matched conditions returned.</li>"}
+              </ul>
+
+              <p><b>Unmet conditions</b></p>
+              <ul>
+                ${unmet.length
+                  ? unmet.map(c => `<li><span class="status fail">UNMET</span>${c}</li>`).join("")
+                  : "<li>No unmet conditions returned.</li>"}
+              </ul>
+
+              <p><b>Documents to check</b></p>
+              <ul>
+                ${(extra?.docs || ["Check the official scheme portal for required documents."])
+                  .map(d => `<li>${d}</li>`).join("")}
+              </ul>
+            </details>
+
+            ${extra?.link ? `
+              <p style="margin-top:15px">
+                <a href="${extra.link}" target="_blank" rel="noopener"
+                style="color:#245bdb;font-size:13px;font-weight:700">
+                Visit scheme portal ↗</a>
+              </p>` : ""}
+          </div>
+        </article>
+      `;
+    }).join("");
+
+    document.getElementById("results").scrollIntoView({ behavior: "smooth" });
+
+  } catch (error) {
+    count.textContent = "Connection error";
+    container.innerHTML = `
+      <div class="empty">
+        Could not connect to the backend. Please try again.
+        <br><br>${error.message}
+      </div>`;
+  }
 });
 
 document.getElementById("resetBtn").addEventListener("click",()=>{
