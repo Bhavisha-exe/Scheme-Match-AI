@@ -193,12 +193,13 @@ def explain(profile: UserProfile):
 
     try:
         response = client.models.generate_content(
-            model="gemini-3.8-flash",
+            model="gemini-2.5-flash",
             contents=prompt
         )
+
         return {"explanation": response.text}
 
-        except Exception as e:
+    except Exception as e:
         return {
             "error": "AI explanation unavailable",
             "details": str(e)
