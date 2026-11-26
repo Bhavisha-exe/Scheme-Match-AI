@@ -1,11 +1,24 @@
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 app = FastAPI(
     title="SchemeMatch API",
     description="Government Scheme Eligibility and Recommendation Engine"
 )
+
+# Allow the GitHub Pages website to access this backend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://bhavisha-exe.github.io"
+    ],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 class UserProfile(BaseModel):
     age: int
@@ -14,6 +27,7 @@ class UserProfile(BaseModel):
     state: str
     category: str
     gender: str
+
 
 schemes = [
     {
@@ -36,9 +50,13 @@ schemes = [
     }
 ]
 
+
 @app.get("/")
 def home():
-    return {"message": "SchemeMatch Backend is running!"}
+    return {
+        "message": "SchemeMatch Backend is running!"
+    }
+
 
 @app.post("/recommend")
 def recommend(profile: UserProfile):
@@ -48,7 +66,11 @@ def recommend(profile: UserProfile):
         matched = []
         unmet = []
 
-        if scheme["occupation"] == "Any" or scheme["occupation"].lower() == profile.occupation.lower():
+        if (
+            scheme["occupation"] == "Any"
+            or scheme["occupation"].lower()
+            == profile.occupation.lower()
+        ):
             matched.append("Occupation condition matched")
         else:
             unmet.append("Occupation condition not matched")
@@ -63,7 +85,11 @@ def recommend(profile: UserProfile):
         results.append({
             "scheme": scheme["name"],
             "eligible": eligible,
-            "status": "Eligible" if eligible else "Needs further checking",
+            "status": (
+                "Eligible"
+                if eligible
+                else "Needs further checking"
+            ),
             "matched_conditions": matched,
             "unmet_conditions": unmet,
             "benefit": scheme["benefit"]
