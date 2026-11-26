@@ -84,10 +84,15 @@ def setup_database():
 
     db = SessionLocal()
     try:
-        if db.query(Scheme).count() == 0:
-            for item in initial_schemes:
+        existing_names = {
+            name for (name,) in db.query(Scheme.name).all()
+        }
+
+        for item in initial_schemes:
+            if item["name"] not in existing_names:
                 db.add(Scheme(**item))
-            db.commit()
+
+        db.commit()
     finally:
         db.close()
 
