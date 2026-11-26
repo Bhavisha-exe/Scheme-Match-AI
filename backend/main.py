@@ -1,25 +1,31 @@
+
 import os
 from fastapi import FastAPI
-from google import genai
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from google import genai
 from sqlalchemy import create_engine, Column, Integer, String, Float
 from sqlalchemy.orm import declarative_base, sessionmaker
 
+# Gemini configuration
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-client = genai.Client(api_key=GEMINI_API_KEY)
+
+client = (
+    genai.Client(api_key=GEMINI_API_KEY)
+    if GEMINI_API_KEY else None
+)
 
 app = FastAPI(
     title="SchemeMatch API",
-    description="Government Scheme Eligibility and Recommendation Engine"
+    description="AI-Based Government Scheme Eligibility and Recommendation Engine"
 )
 
 # CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-       "https://bhavisha-exe.github.io",
-       "http://localhost:5173",
+        "https://bhavisha-exe.github.io",
+        "http://localhost:5173",
     ],
     allow_credentials=False,
     allow_methods=["*"],
@@ -44,7 +50,7 @@ SessionLocal = sessionmaker(bind=engine)
 Base = declarative_base()
 
 
-# Database table
+# Database model
 class Scheme(Base):
     __tablename__ = "schemes"
 
@@ -55,7 +61,7 @@ class Scheme(Base):
     benefit = Column(String, nullable=False)
 
 
-# Initial demo scheme records
+# Initial demo records
 initial_schemes = [
     {
         "name": "PM-KISAN Samman Nidhi",
@@ -97,6 +103,7 @@ def setup_database():
         db.close()
 
 
+# User profile
 class UserProfile(BaseModel):
     age: int
     income: float
@@ -110,7 +117,8 @@ class UserProfile(BaseModel):
 def home():
     return {
         "message": "SchemeMatch Backend is running!",
-        "database": "PostgreSQL connected"
+        "database": "PostgreSQL connected",
+        "retrieval": "Database-backed RAG enabled"
     }
 
 
@@ -119,6 +127,7 @@ def get_schemes():
     db = SessionLocal()
     try:
         records = db.query(Scheme).all()
+
         return [
             {
                 "name": s.name,
@@ -131,6 +140,60 @@ def get_schemes():
         db.close()
 
 
+# Database retrieval for RAG
+def retrieve_relevant_schemes(profile: UserProfile):
+    db = SessionLocal()
+
+    try:
+        schemes = db.query(Scheme).all()
+        ranked_schemes = []
+
+        for scheme in schemes:
+            score = 0
+
+            # Occupation relevance
+            if scheme.occupation.lower() == profile.occupation.lower():
+                score += 3
+            elif scheme.occupation.lower() == "any":
+                score += 1
+
+            # Income relevance
+            if profile.income <= scheme.max_income:
+                score += 2
+
+            # Scheme name and benefit keyword relevance
+            profile_words = set(
+                profile.occupation.lower().split()
+            )
+
+            scheme_text = (
+                scheme.name + " " + scheme.benefit
+            ).lower()
+
+            for word in profile_words:
+                if len(word) > 2 and word in scheme_text:
+                    score += 1
+
+            ranked_schemes.append({
+                "name": scheme.name,
+                "occupation": scheme.occupation,
+                "maximum_income": scheme.max_income,
+                "benefit": scheme.benefit,
+                "relevance_score": score
+            })
+
+        ranked_schemes.sort(
+            key=lambda item: item["relevance_score"],
+            reverse=True
+        )
+
+        return ranked_schemes[:5]
+
+    finally:
+        db.close()
+
+
+# Eligibility recommendation endpoint
 @app.post("/recommend")
 def recommend(profile: UserProfile):
     db = SessionLocal()
@@ -179,37 +242,97 @@ def recommend(profile: UserProfile):
     finally:
         db.close()
 
+
+# RAG-based AI explanation endpoint
 @app.post("/explain")
 def explain(profile: UserProfile):
+
+    # Step 1: Retrieve relevant schemes from PostgreSQL
+    retrieved_schemes = retrieve_relevant_schemes(profile)
+
+    if not retrieved_schemes:
+        return {
+            "explanation": "No scheme information was found in the database.",
+            "retrieved_schemes": []
+        }
+
+    if client is None:
+        return {
+            "explanation": "AI explanation is unavailable. Gemini API key is not configured.",
+            "retrieved_schemes": retrieved_schemes
+        }
+
+    # Step 2: Prepare retrieved database context
+    scheme_context = "\n".join([
+        (
+            f"Scheme: {scheme['name']}\n"
+            f"Occupation: {scheme['occupation']}\n"
+            f"Maximum income in database: ₹{scheme['maximum_income']}\n"
+            f"Recorded benefit: {scheme['benefit']}\n"
+            f"Retrieval relevance score: {scheme['relevance_score']}"
+        )
+        for scheme in retrieved_schemes
+    ])
+
+    # Step 3: Build grounded prompt
     prompt = f"""
-    You are SchemeMatch, a government scheme assistant.
+You are SchemeMatch, an AI government scheme information assistant.
 
-    Explain these user details in simple language:
-    Age: {profile.age}
-    Income: ₹{profile.income}
-    Occupation: {profile.occupation}
-    State: {profile.state}
-    Category: {profile.category}
-    Gender: {profile.gender}
+USER PROFILE:
+Age: {profile.age}
+Income: ₹{profile.income}
+Occupation: {profile.occupation}
+State: {profile.state}
+Category: {profile.category}
+Gender: {profile.gender}
 
-    Explain that eligibility must be verified using official government
-    sources. Do not invent scheme benefits or eligibility rules.
-    """
+RETRIEVED SCHEME INFORMATION FROM THE POSTGRESQL DATABASE:
+{scheme_context}
 
-    for attempt in range(3):
-        try:
-            response = client.models.generate_content(
-                model="gemini-3.8-flash",
-                contents=prompt
+TASK:
+1. Explain the user's profile in simple language.
+2. Explain which retrieved schemes may be relevant and why.
+3. Use only the scheme information provided above.
+4. Do not invent eligibility conditions, documents, deadlines,
+   benefits, or government rules.
+5. Clearly explain that the database contains limited demo criteria.
+6. Do not guarantee eligibility or approval.
+7. Tell the user to verify final eligibility using official
+   government sources.
+
+Write a short, clear explanation in simple language.
+"""
+
+    # Step 4: Generate AI explanation
+    try:
+        response = client.models.generate_content(
+            model="gemini-3.8-flash",
+            contents=prompt
+        )
+
+        return {
+            "explanation": response.text or
+                "AI could not generate an explanation.",
+            "retrieved_schemes": retrieved_schemes,
+            "retrieval_method": "PostgreSQL database retrieval"
+        }
+
+    except Exception as e:
+        error_message = str(e)
+
+        if "429" in error_message or "RESOURCE_EXHAUSTED" in error_message:
+            message = (
+                "Gemini API request quota has been reached. "
+                "Please try again after the quota resets."
             )
-            return {"explanation": response.text}
+        else:
+            message = (
+                "AI explanation is temporarily unavailable. "
+                "Please try again later."
+            )
 
-        except Exception as e:
-            if attempt == 2:
-                return {
-                    "explanation": "AI explanation is temporarily unavailable. Please try again later.",
-                    "error": str(e)
-                }
-
-            import time
-            time.sleep(2)
+        return {
+            "explanation": message,
+            "retrieved_schemes": retrieved_schemes,
+            "error": error_message
+        }
