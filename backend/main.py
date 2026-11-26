@@ -194,6 +194,7 @@ def retrieve_relevant_schemes(profile: UserProfile):
 
 
 # Eligibility recommendation endpoint
+
 @app.post("/recommend")
 def recommend(profile: UserProfile):
     db = SessionLocal()
@@ -203,17 +204,22 @@ def recommend(profile: UserProfile):
         results = []
 
         for scheme in schemes:
+
+            # Filter by occupation
+            occupation_match = (
+                scheme.occupation.lower() == "any"
+                or scheme.occupation.lower() == profile.occupation.lower()
+            )
+
+            if not occupation_match:
+                continue
+
             matched = []
             unmet = []
 
-            if (
-                scheme.occupation == "Any"
-                or scheme.occupation.lower() == profile.occupation.lower()
-            ):
-                matched.append("Occupation condition matched")
-            else:
-                unmet.append("Occupation condition not matched")
+            matched.append("Occupation condition matched")
 
+            # Check income
             if profile.income <= scheme.max_income:
                 matched.append("Income condition matched")
             else:
@@ -241,6 +247,7 @@ def recommend(profile: UserProfile):
 
     finally:
         db.close()
+
 
 
 # RAG-based AI explanation endpoint
