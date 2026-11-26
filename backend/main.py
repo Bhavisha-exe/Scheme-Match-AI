@@ -17,7 +17,10 @@ app = FastAPI(
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://bhavisha-exe.github.io"],
+    allow_origins=[
+    "https://bhavisha-exe.github.io",
+    "https://schemematch-backend.onrender.com"
+],
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
