@@ -198,7 +198,7 @@ def explain(profile: UserProfile):
 
     try:
         response = client.models.generate_content(
-           model="gemini-3.8-flash",
+            model="gemini-3.8-flash",
             contents=prompt
         )
 
@@ -206,6 +206,6 @@ def explain(profile: UserProfile):
 
     except Exception as e:
         return {
-            "error": "AI explanation unavailable",
-            "details": str(e)
+            "explanation": "AI explanation is temporarily unavailable. Please check official government scheme sources to verify eligibility.",
+            "error": str(e)
         }
