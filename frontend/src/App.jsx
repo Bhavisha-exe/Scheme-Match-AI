@@ -43,6 +43,7 @@ function App() {
   const [gender, setGender] = useState("");
   const [applicantCategory, setApplicantCategory] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [recommendations, setRecommendations] = useState([]);
 
   const filteredSchemes = schemes.filter((scheme) => {
     const matchesSearch = scheme.title
@@ -82,6 +83,7 @@ function App() {
      }
 
     const data = await response.json();
+    setRecommendations(data.recommendations || []);
 
     console.log("Backend recommendations:", data);
     setSubmitted(true);
@@ -422,12 +424,58 @@ function App() {
                 Continue to discover schemes <span>→</span>
               </button>
 
-              {submitted && (
-                <p className="form-success" role="status">
-                  Thanks, {name}. Your details have been entered in this demo.
-                  Eligibility matching will be connected to the backend next.
-                </p>
-              )}
+             {submitted && (
+               <div className="form-success" role="status">
+                 <h3>Scheme Recommendations</h3>
+
+                 {recommendations.length > 0 ? (
+                   recommendations.map((scheme, index) => (
+                    <div className="scheme-card" key={index}>
+                      <h3>{scheme.scheme}</h3>
+
+                      <p>
+                        <strong>Eligibility:</strong>{" "}
+                        {scheme.eligible ? "Eligible" : "Not confirmed"}
+                      </p>
+
+                      <p><strong>Status:</strong> {scheme.status}</p>
+
+                      <p><strong>Benefit:</strong> {scheme.benefit}</p>
+
+                      <div>
+                        <strong>Matched Conditions:</strong>
+                        {Array.isArray(scheme.matched_condition) &&
+                        scheme.matched_condition.length > 0 ? (
+                         <ul>
+                           {scheme.matched_condition.map((condition, i) => (
+                             <li key={i}>{condition}</li>
+               ))} 
+                         </ul>
+                     ) : (
+                      <p>None listed</p>
+               )}
+            </div> 
+
+            <div>
+             <strong>Unmet Conditions:</strong>
+             {Array.isArray(scheme.unmet_condition) &&
+             scheme.unmet_condition.length > 0 ? (
+              <ul>
+                {scheme.unmet_condition.map((condition, i) => (
+                  <li key={i}>{condition}</li>
+              ))}
+              </ul>
+            ) : (
+              <p>None listed</p>
+          )}
+       </div>
+    </div>
+                   ))
+                ) : (
+                  <p>No recommendations found.</p>
+                )}
+              </div>
+             )}
             </form>
           </div>
         </section>

@@ -945,3 +945,33 @@ footer > span {
     align-items: flex-start;
   }
 }
+
+
+.scheme-card {
+  background: #ffffff;
+  border: 1px solid #e2e8df;
+  border-radius: 16px;
+  padding: 22px;
+  margin-top: 18px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+}
+
+.scheme-card h3 {
+  color: #145c43;
+  margin-bottom: 14px;
+}
+
+.scheme-card p {
+  margin: 9px 0;
+  line-height: 1.6;
+}
+
+.scheme-card ul {
+  padding-left: 22px;
+  margin-top: 8px;
+}
+
+.scheme-card li {
+  margin-bottom: 7px;
+}
+
