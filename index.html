@@ -231,6 +231,20 @@ document.getElementById("profileForm").addEventListener("submit", async function
     }
 
     const data = await response.json();
+    const aiResponse = await fetch("https://schemematch-backend.onrender.com/explain", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(profile)
+});
+
+const aiData = await aiResponse.json();
+
+const aiBox = document.createElement("div");
+aiBox.className = "notice";
+aiBox.style.whiteSpace = "pre-wrap";
+aiBox.textContent = aiData.explanation || "AI explanation unavailable.";
+aiBox.id = "aiExplanation";
+container.before(aiBox);
     const results = data.recommendations || [];
 
     count.textContent = results.length + " schemes analysed";
