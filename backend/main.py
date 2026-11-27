@@ -167,16 +167,16 @@ def import_dataset():
     if not isinstance(schemes_data, list) or not isinstance(rules_data, list):
         raise RuntimeError("Both JSON files must contain arrays of records.")
 
-    rules_by_id = {
-        str(r.get("Scheme ID", "")).strip(): r
-        for r in rules_data
+   rules_by_id = {
+    str(r.get("scheme_id", "")).strip(): r
+    for r in rules_data
     }
 
     db = SessionLocal()
 
     try:
         for item in schemes_data:
-            sid = str(item.get("Scheme ID", "")).strip()
+            sid = str(item.get("scheme_id", item.get("Scheme ID", ""))).strip()
 
             if not sid:
                 continue
@@ -219,33 +219,18 @@ def import_dataset():
                     rr = EligibilityRule(scheme_id=sid)
                     db.add(rr)
 
-                rr.minimum_age = str(rule.get("Minimum Age", ""))
-                rr.maximum_age = str(rule.get("Maximum Age", ""))
-                rr.maximum_annual_income = str(
-                    rule.get("Maximum Annual Income", "")
-                )
-                rr.eligible_occupation = str(
-                    rule.get("Eligible Occupation", "")
-                )
-                rr.eligible_location = str(
-                    rule.get("Eligible Location", "")
-                )
-                rr.other_conditions = str(
-                    rule.get("Other Conditions", "")
-                )
+                                rr.minimum_age = str(rule.get("minimum_age") or "")
+                rr.maximum_age = str(rule.get("maximum_age") or "")
+                rr.maximum_annual_income = str(rule.get("maximum_annual_income") or "")
+                rr.eligible_occupation = str(rule.get("eligible_occupation") or "")
+                rr.eligible_location = str(rule.get("eligible_location") or "")
+                rr.other_conditions = str(rule.get("other_conditions") or "")
 
-                rr.eligibility_source_url = str(
-                    rule.get("eligibility_source_url", "")
-                )
-
-                rr.verification_status = str(
-                    rule.get("verification_status", "needs_review")
-                )
-
+                rr.eligibility_source_url = rule.get("eligibility_source_url") or ""
+                rr.verification_status = rule.get("verification_status") or "needs_review"
                 rr.verified_eligibility_criteria = json_safe(
-                    rule.get("verified_eligibility_criteria", [])
+                    rule.get("verified_eligibility_criteria")
                 )
-
         db.commit()
 
     except Exception:
