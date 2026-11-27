@@ -51,13 +51,12 @@ app.add_middleware(
     allow_origins=[
         "https://bhavisha-exe.github.io",
         "http://localhost:5173",
+        "https://scheme-match-ai-two.vercel.app",
     ],
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
 # ---------- Database Models ----------
 
 class Scheme(Base):
