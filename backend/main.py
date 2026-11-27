@@ -168,9 +168,9 @@ def import_dataset():
         raise RuntimeError("Both JSON files must contain arrays of records.")
 
    rules_by_id = {
-    str(r.get("scheme_id", "")).strip(): r
+    str(r.get("scheme_id", r.get("Scheme ID", ""))).strip(): r
     for r in rules_data
-    }
+}
 
     db = SessionLocal()
 
