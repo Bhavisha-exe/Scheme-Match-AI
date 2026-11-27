@@ -1,0 +1,407 @@
+[
+  {
+    "Scheme ID": "SCH001",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No fixed income limit specified",
+    "Eligible Occupation": "Coffee grower / Farmer",
+    "Eligible Location": "Coffee-growing regions in India, subject to Coffee Board eligibility",
+    "Other Conditions": "Eligible SC, ST and other growers; land must be suitable for coffee cultivation; land records must be in the applicant's name; seeds/seedlings must be obtained from the Coffee Board or approved nodal agency."
+  },
+  {
+    "Scheme ID": "SCH002",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No fixed income limit; government exclusion criteria apply",
+    "Eligible Occupation": "Landholding farmer families",
+    "Eligible Location": "India",
+    "Other Conditions": "Cultivable agricultural land must be recorded in the name of eligible farmer family members. Government exclusion criteria apply."
+  },
+  {
+    "Scheme ID": "SCH003",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "₹3,50,000",
+    "Eligible Occupation": "Student",
+    "Eligible Location": "India",
+    "Other Conditions": "Must be entering Class 9 in a government, government-aided or local body school. Must have at least 55% marks in Class 7 (50% for SC/ST students) and qualify in the state selection test."
+  },
+  {
+    "Scheme ID": "SCH004",
+    "Minimum Age": "70 years (for the senior-citizen eligibility category)",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No income limit for senior citizens aged 70+",
+    "Eligible Occupation": "All occupations",
+    "Eligible Location": "India",
+    "Other Conditions": "Poor and vulnerable families identified under scheme eligibility criteria are eligible. All senior citizens aged 70 years or above are eligible regardless of income."
+  },
+  {
+    "Scheme ID": "SCH005",
+    "Minimum Age": "18 years 7 months",
+    "Maximum Age": "55 years",
+    "Maximum Annual Income": "Below ₹8 lakh (one of the alternative eligibility categories, not compulsory for everyone)",
+    "Eligible Occupation": "Pregnant and lactating women",
+    "Eligible Location": "India",
+    "Other Conditions": "Must belong to at least one eligible social or economic category, such as SC/ST, BPL, e-Shram cardholder or MGNREGA worker. Benefits depend on pregnancy and childbirth conditions."
+  },
+  {
+    "Scheme ID": "SCH006",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "₹9 lakh (MIG category; EWS up to ₹3 lakh, LIG ₹3–6 lakh, MIG ₹6–9 lakh)",
+    "Eligible Occupation": "All occupations",
+    "Eligible Location": "Urban areas in India",
+    "Other Conditions": "Applicant's family must not own a pucca house anywhere in India. Must meet the income and other conditions of the applicable scheme component."
+  },
+  {
+    "Scheme ID": "SCH007",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No fixed income limit specified",
+    "Eligible Occupation": "Street vendors",
+    "Eligible Location": "India",
+    "Other Conditions": "Must be an eligible street vendor identified through a Certificate of Vending (CoV), Letter of Recommendation (LoR), or verification by the local authority."
+  },
+  {
+    "Scheme ID": "SCH008",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "₹4,50,000",
+    "Eligible Occupation": "Student",
+    "Eligible Location": "India",
+    "Other Conditions": "Must have passed Class 12 and scored above the 80th percentile in the relevant board examination. Must be pursuing a regular recognised college or university course and must not be receiving another scholarship."
+  },
+  {
+    "Scheme ID": "SCH009",
+    "Minimum Age": "18 years",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No income limit specified",
+    "Eligible Occupation": "Entrepreneurs; women and SC/ST applicants",
+    "Eligible Location": "India",
+    "Other Conditions": "Applicant must be a woman or belong to the SC/ST category. The loan is for setting up a greenfield (first-time) enterprise. For non-individual enterprises, at least 51% ownership and controlling stake must be held by a woman or SC/ST entrepreneur."
+  },
+  {
+    "Scheme ID": "SCH010",
+    "Minimum Age": "18 years",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No income limit specified",
+    "Eligible Occupation": "Traditional artisans and craftspeople",
+    "Eligible Location": "India",
+    "Other Conditions": "Must work independently in one of the 18 notified traditional trades. Only one family member can register. Government employees and their family members are not eligible. Restrictions apply to applicants who have taken similar government business loans in the previous five years."
+  },
+  {
+    "Scheme ID": "SCH011",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No income limit specified",
+    "Eligible Occupation": "Residential electricity consumers",
+    "Eligible Location": "India",
+    "Other Conditions": "Applicant must be a residential electricity consumer with a suitable rooftop for solar installation. The electricity connection should be in the applicant's household name or meet the applicable requirements."
+  },
+  {
+    "Scheme ID": "SCH012",
+    "Minimum Age": "18 years",
+    "Maximum Age": "40 years",
+    "Maximum Annual Income": "Not income-based",
+    "Eligible Occupation": "All eligible Indian citizens; especially unorganised-sector workers",
+    "Eligible Location": "India",
+    "Other Conditions": "Must have a savings bank or post office account. People who are or have been income-tax payers cannot join from 1 October 2022."
+  },
+  {
+    "Scheme ID": "SCH013",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No income limit",
+    "Eligible Occupation": "Students",
+    "Eligible Location": "India",
+    "Other Conditions": "Must be enrolled in Bal Vatika or Classes I–VIII in a Government or Government-aided school."
+  },
+  {
+    "Scheme ID": "SCH014",
+    "Minimum Age": "Birth",
+    "Maximum Age": "Below 10 years",
+    "Maximum Annual Income": "No income limit",
+    "Eligible Occupation": "Girl child",
+    "Eligible Location": "India",
+    "Other Conditions": "A parent or legal guardian must open the account. Maximum two girl children per family (exceptions for twins/triplets). Only one account per girl child."
+  },
+  {
+    "Scheme ID": "SCH015",
+    "Minimum Age": "18 years",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No income limit",
+    "Eligible Occupation": "Any adult willing to do unskilled manual work",
+    "Eligible Location": "Rural areas of India",
+    "Other Conditions": "Applicant must be an adult member of a rural household. Household registration and a Gramin Rozgar Guarantee Card are required. Provides up to 125 days of guaranteed wage employment per household per financial year."
+  },
+  {
+    "Scheme ID": "SCH016",
+    "Minimum Age": "18 years",
+    "Maximum Age": "40 years",
+    "Maximum Annual Income": "₹1,80,000 per year (monthly income ₹15,000 or less)",
+    "Eligible Occupation": "Unorganised-sector workers such as street vendors, domestic workers, agricultural labourers and construction workers",
+    "Eligible Location": "India",
+    "Other Conditions": "Must not be covered under EPFO, ESIC or NPS (Government-funded), and must not be an income-tax payer. Must have an Aadhaar card and savings bank or Jan Dhan account."
+  },
+  {
+    "Scheme ID": "SCH017",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No income limit",
+    "Eligible Occupation": "Farmers, including sharecroppers and tenant farmers",
+    "Eligible Location": "Notified areas across India",
+    "Other Conditions": "Must grow a notified crop in a notified area and have an insurable interest in the crop. Land records or relevant cultivation documents may be required."
+  },
+  {
+    "Scheme ID": "SCH018",
+    "Minimum Age": "18 years (age of deceased breadwinner)",
+    "Maximum Age": "Below 60 years (age of deceased breadwinner)",
+    "Maximum Annual Income": "No fixed annual income limit; family must be BPL",
+    "Eligible Occupation": "BPL households whose primary breadwinner has died",
+    "Eligible Location": "India",
+    "Other Conditions": "The deceased must have been the primary breadwinner of the family. A homemaker may also be considered a breadwinner. The surviving eligible household member can receive one-time financial assistance of ₹20,000."
+  },
+  {
+    "Scheme ID": "SCH019",
+    "Minimum Age": "18 years",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No fixed income limit; applicant must belong to a poor household",
+    "Eligible Occupation": "Women from eligible poor households",
+    "Eligible Location": "India",
+    "Other Conditions": "No existing LPG connection should be present in the household. Applicant must belong to an eligible category such as SC/ST, AAY, PMAY-G beneficiary, forest dweller or another qualifying poor household under the prescribed declaration."
+  },
+  {
+    "Scheme ID": "SCH020",
+    "Minimum Age": "15 years (18 years for RPL)",
+    "Maximum Age": "45 years (59 years for RPL)",
+    "Maximum Annual Income": "No income limit",
+    "Eligible Occupation": "Students, school/college dropouts, unemployed youth and people seeking skill training",
+    "Eligible Location": "India",
+    "Other Conditions": "Must be an Indian national with valid Aadhaar. Eligibility and educational qualifications depend on the selected course. RPL applicants must have prior experience in the relevant skill."
+  },
+  {
+    "Scheme ID": "SCH021",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "Not annual-income based; monthly wage ceiling ₹1,00,000",
+    "Eligible Occupation": "First-time formal-sector employees registered with EPFO",
+    "Eligible Location": "India",
+    "Other Conditions": "Must join an eligible establishment between 1 August 2025 and 31 July 2027. Must not have been an EPFO contributing member before 1 August 2025. EPFO contributions and required UAN authentication are necessary."
+  },
+  {
+    "Scheme ID": "SCH022",
+    "Minimum Age": "14 years (18 years for hazardous trades)",
+    "Maximum Age": "35 years (for Government stipend support)",
+    "Maximum Annual Income": "No income limit",
+    "Eligible Occupation": "ITI pass-outs, vocational trainees, graduates, diploma holders and eligible fresh apprentices",
+    "Eligible Location": "India",
+    "Other Conditions": "Must meet the educational and physical requirements of the selected trade, register on the Apprenticeship Portal and have an apprenticeship contract. Aadhaar is required."
+  },
+  {
+    "Scheme ID": "SCH023",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No fixed income limit; targets rural poor households",
+    "Eligible Occupation": "Rural women, self-help groups (SHGs) and rural poor households",
+    "Eligible Location": "Rural India (participating areas)",
+    "Other Conditions": "Primarily aims to organise rural poor women into Self-Help Groups. SHGs generally have 10–20 members and must follow prescribed group rules to receive financial assistance."
+  },
+  {
+    "Scheme ID": "SCH024",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No income limit specified",
+    "Eligible Occupation": "Fishers, fish farmers, fish workers, fish vendors and fisheries-related businesses",
+    "Eligible Location": "India",
+    "Other Conditions": "Individual beneficiaries or eligible fisheries enterprises must meet the conditions of the relevant scheme component. Registration on the National Fisheries Digital Platform (NFDP) is required for applicable benefits."
+  },
+  {
+    "Scheme ID": "SCH025",
+    "Minimum Age": "10 years",
+    "Maximum Age": "No upper age limit",
+    "Maximum Annual Income": "No income limit",
+    "Eligible Occupation": "Any Indian citizen, especially unbanked individuals",
+    "Eligible Location": "India",
+    "Other Conditions": "Applicant should not already have a bank account for opening a new PMJDY account. A basic savings account can be opened at a bank branch or Bank Mitra outlet. KYC documents are required."
+  },
+  {
+    "Scheme ID": "SCH026",
+    "Minimum Age": "18 years",
+    "Maximum Age": "50 years",
+    "Maximum Annual Income": "No income limit",
+    "Eligible Occupation": "All eligible individuals",
+    "Eligible Location": "India",
+    "Other Conditions": "Must have an individual savings bank or post office account in a participating institution and give consent for annual premium auto-debit. Only one policy per person is allowed. Coverage can continue up to age 55 with regular renewal."
+  },
+  {
+    "Scheme ID": "SCH027",
+    "Minimum Age": "18 years",
+    "Maximum Age": "70 years",
+    "Maximum Annual Income": "No income limit",
+    "Eligible Occupation": "All eligible individuals",
+    "Eligible Location": "India",
+    "Other Conditions": "Must have an individual savings bank or post office account in a participating institution and give consent for annual premium auto-debit. Only one account can be used for enrolment."
+  },
+  {
+    "Scheme ID": "SCH028",
+    "Minimum Age": "60 years",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No fixed income limit for all components",
+    "Eligible Occupation": "Senior citizens",
+    "Eligible Location": "India",
+    "Other Conditions": "Must be an Indian senior citizen aged 60 or above. Specific benefits, such as assistive devices under Rashtriya Vayoshri Yojana, have additional income and disability conditions."
+  },
+  {
+    "Scheme ID": "SCH029",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No fixed annual income limit; eligibility depends on NFSA household classification",
+    "Eligible Occupation": "Antyodaya Anna Yojana (AAY) and Priority Household (PHH) ration-card holders",
+    "Eligible Location": "India",
+    "Other Conditions": "Must be identified as an eligible NFSA beneficiary and hold a valid AAY or PHH ration card. Food grains are received through the existing ration card at a Fair Price Shop."
+  },
+  {
+    "Scheme ID": "SCH030",
+    "Minimum Age": "No minimum age",
+    "Maximum Age": "No maximum age",
+    "Maximum Annual Income": "₹3,60,000 per year (monthly family income up to ₹30,000)",
+    "Eligible Occupation": "Persons with disabilities",
+    "Eligible Location": "India",
+    "Other Conditions": "Must have at least 40% disability and a UDID card or UDID enrolment number with disability certificate. Must not have received assistance for the same purpose during the previous 3 years."
+  },
+  {
+    "Scheme ID": "SCH031",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No income limit",
+    "Eligible Occupation": "Rural households",
+    "Eligible Location": "Rural India",
+    "Other Conditions": "The mission aims to provide Functional Household Tap Connections (FHTC) to every rural household. Water supply should meet prescribed quality and quantity standards and be available regularly."
+  },
+  {
+    "Scheme ID": "SCH032",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No fixed income limit; household category determines toilet incentive eligibility",
+    "Eligible Occupation": "Rural households",
+    "Eligible Location": "Rural India",
+    "Other Conditions": "For individual household toilet incentive, household must be a new eligible BPL household or an identified APL household belonging to SC/ST, small or marginal farmers, landless labourers with homestead, households with a person with disability, or women-headed households. Final approval is through local authorities."
+  },
+  {
+    "Scheme ID": "SCH033",
+    "Minimum Age": "15 years",
+    "Maximum Age": "35 years",
+    "Maximum Annual Income": "No fixed income limit; applicant must belong to a poor rural household",
+    "Eligible Occupation": "Unemployed rural youth seeking skill training and employment",
+    "Eligible Location": "Rural India",
+    "Other Conditions": "Must belong to an eligible poor rural household. Upper age limit is 45 years for women, persons with disabilities, PVTGs and other specified special groups."
+  },
+  {
+    "Scheme ID": "SCH034",
+    "Minimum Age": "18 years",
+    "Maximum Age": "45 years",
+    "Maximum Annual Income": "OBC: Below ₹3 lakh; EBC: Below ₹1 lakh; SC, DNT and Safai Karamcharis: No income limit",
+    "Eligible Occupation": "SC, OBC, EBC, DNT candidates and Safai Karamcharis, including waste pickers",
+    "Eligible Location": "India",
+    "Other Conditions": "Must belong to an eligible category, have Aadhaar and an Aadhaar-linked bank account (subject to applicable exemptions), and meet the selected course requirements."
+  },
+  {
+    "Scheme ID": "SCH035",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No income limit",
+    "Eligible Occupation": "Farmers, groups of farmers, cooperatives, FPOs and other eligible farmer organisations",
+    "Eligible Location": "India",
+    "Other Conditions": "Eligibility depends on the component. Farmers can apply for solar agricultural pumps, solarisation of existing grid-connected pumps or solar power plants on eligible land. State implementing agency and DISCOM conditions apply."
+  },
+  {
+    "Scheme ID": "SCH036",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No general income limit",
+    "Eligible Occupation": "Fishers, fish farmers, fish workers, fish vendors, fisheries entrepreneurs, SHGs and cooperatives",
+    "Eligible Location": "India",
+    "Other Conditions": "Must be directly involved in fisheries or aquaculture, or belong to an eligible fisheries organisation. Component-specific conditions, project approval and registration requirements apply."
+  },
+  {
+    "Scheme ID": "SCH037",
+    "Minimum Age": "18 years",
+    "Maximum Age": "25 years",
+    "Maximum Annual Income": "₹8 lakh (family income limit, subject to scheme rules)",
+    "Eligible Occupation": "Unemployed youth and eligible final-year graduate/postgraduate students",
+    "Eligible Location": "India",
+    "Other Conditions": "Must be an Indian national. Must not be in full-time employment. Final-year students need an institution-issued No Objection Certificate (NOC). Family members must not include a permanent government employee. Certain qualifications and institutions are excluded under scheme rules."
+  },
+  {
+    "Scheme ID": "SCH038",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "₹2,50,000",
+    "Eligible Occupation": "Scheduled Caste (SC) students pursuing post-matric or post-secondary education",
+    "Eligible Location": "India",
+    "Other Conditions": "Must be an Indian national belonging to the SC category recognised in the applicant's state or UT. Must have passed Class 10 or an equivalent examination and be enrolled in a recognised post-matric course. Must not receive another scholarship simultaneously."
+  },
+  {
+    "Scheme ID": "SCH039",
+    "Minimum Age": "",
+    "Maximum Age": "35 years",
+    "Maximum Annual Income": "₹8,00,000 (family income)",
+    "Eligible Occupation": "SC students, Denotified/Nomadic/Semi-Nomadic Tribes, landless agricultural labourers and traditional artisans",
+    "Eligible Location": "India (for eligible Indian applicants studying abroad)",
+    "Other Conditions": "Must have at least 60% marks or equivalent in the qualifying examination and an unconditional admission offer from an eligible foreign university. Scholarship is for Master's and PhD courses."
+  },
+  {
+    "Scheme ID": "SCH040",
+    "Minimum Age": "Above 18 years",
+    "Maximum Age": "No upper age limit",
+    "Maximum Annual Income": "No income limit",
+    "Eligible Occupation": "Entrepreneurs, unemployed youth and individuals planning to start a new micro-enterprise",
+    "Eligible Location": "Rural and urban India",
+    "Other Conditions": "Only new eligible non-farm projects qualify. For projects above ₹10 lakh in manufacturing or ₹5 lakh in service/business, at least Class 8 pass is required. Only one person per family can receive assistance. Existing units that have already received government subsidy are generally not eligible."
+  },
+  {
+    "Scheme ID": "SCH041",
+    "Minimum Age": "Below 18 years",
+    "Maximum Age": "18 years",
+    "Maximum Annual Income": "No general income limit; preventive sponsorship has separate income criteria",
+    "Eligible Occupation": "Children in need of care and protection, vulnerable children and children in conflict with law",
+    "Eligible Location": "India",
+    "Other Conditions": "Must fall under an eligible child-protection category. Support may include institutional care, sponsorship, foster care, adoption or aftercare. Eligibility depends on assessment by the relevant Child Welfare Committee or authority."
+  },
+  {
+    "Scheme ID": "SCH042",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No fixed income limit; eligibility depends on state category and beneficiary category",
+    "Eligible Occupation": "Pregnant women",
+    "Eligible Location": "India",
+    "Other Conditions": "In Low Performing States (including Uttar Pradesh), all pregnant women delivering at eligible government health centres can qualify. In High Performing States, BPL, SC and ST women qualify under prescribed conditions. Additional conditions apply for accredited private hospitals."
+  },
+  {
+    "Scheme ID": "SCH043",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No fixed annual income limit",
+    "Eligible Occupation": "Rural households without a pucca house",
+    "Eligible Location": "Rural India",
+    "Other Conditions": "Household must be houseless or live in a kutcha house with zero, one or two rooms. Must be identified through the SECC/Awaas+ beneficiary list and verified by the Gram Sabha. Government exclusion criteria apply, including specified income, vehicle, land and employment conditions."
+  },
+  {
+    "Scheme ID": "SCH044",
+    "Minimum Age": "",
+    "Maximum Age": "",
+    "Maximum Annual Income": "No fixed national income limit",
+    "Eligible Occupation": "Poorest households, including landless labourers, marginal farmers, rural artisans and informal-sector workers",
+    "Eligible Location": "Rural and urban India",
+    "Other Conditions": "Must belong to an eligible poorest household identified by the State Government. Priority categories include destitute households, certain elderly or disabled-headed households without support, single women or men without support, and eligible tribal households."
+  },
+  {
+    "Scheme ID": "SCH045",
+    "Minimum Age": "Above 18 years",
+    "Maximum Age": "No upper age limit specified",
+    "Maximum Annual Income": "No income limit",
+    "Eligible Occupation": "Micro food processing entrepreneurs, SHGs, FPOs and cooperatives",
+    "Eligible Location": "India",
+    "Other Conditions": "Individual applicant must own an eligible micro food processing enterprise. Individual units should generally be unincorporated and employ fewer than 10 workers. Minimum 10% beneficiary contribution and bank loan are required for individual credit-linked subsidy. Group applications have separate conditions."
+  }
+]
